@@ -31,10 +31,10 @@ class King(Piece):
             new_row: int = self.position.row + direction[0]
             new_column: int = self.position.column + direction[1]
 
-            if new_row == board.row and new_column == board.column:
+            if new_row == self.position.row and new_column == self.position.column:
                 continue
 
-            is_valid_move: bool = board.is_valid_move(self, Position(new_row, new_column))
+            is_valid_move: bool = board.is_move_valid(self, Position(new_row, new_column))
             if is_valid_move:
                 valid_moves.append(Position(new_row, new_column))
 
