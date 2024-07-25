@@ -1,15 +1,26 @@
 from typing import Optional
-from model.piece import Piece
 from model.position import Position
 from model.square import Square
+from model.piece import Piece, King
 
 
 class Board:
-    def __init__(self):
-        self.squares: [[Square]] = [[None for _ in range(8)] for _ in range(8)]
-
     def is_position_occupied(self, position: Position) -> bool:
         return position in self.squares
+
+    def __init__(self):
+        self.squares: [[Square]] = [[Square(Position(row, col), None) for row in range(8)] for col in range(8)]
+        self.setup_board()
+
+    def setup_board(self):
+        self.set_piece(0, 4, "king", "white")
+        self.set_piece(7, 5, "king", "black")
+
+    def set_piece(self, curr_col, curr_row, piece: str, color: str):
+        position = Position(curr_row, curr_col)
+
+        if piece == "king":
+            self.squares[curr_row][curr_col].set_piece(King(position, color))
 
     def is_move_valid(self, piece: Piece, to_position: Position) -> bool:
         if not (0 <= to_position.row < 8 and 0 <= to_position.column < 8):

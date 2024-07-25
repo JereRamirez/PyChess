@@ -7,3 +7,6 @@ class Square:
     def __init__(self, position: Position, piece: Optional[Piece] = None):
         self.position = position
         self.piece = piece
+
+    def set_piece(self, piece: Piece):
+        self.piece = piece
